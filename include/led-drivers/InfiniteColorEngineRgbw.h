@@ -15,9 +15,9 @@ class InfiniteColorEngineRgbw
 	};
 
 public:
-	void renderRgbwFrame(const std::vector<linalg::aliases::float3>& infiniteColors, const float& whiteMixerThreshold, const float& whiteLedIntensity, const linalg::aliases::float3& whitePointRgb, std::vector<uint8_t>& output, size_t writeIndex, LedString::ColorOrder colorOrder);
+	void renderRgbwFrame(const std::vector<linalg::aliases::float3>& infiniteColors, const float& whiteMixerThreshold, const float& whiteLedIntensity, const linalg::aliases::float3& whitePointRgb, const float& ditherFactor, std::vector<uint8_t>& output, size_t writeIndex, LedString::ColorOrder colorOrder);
 
 private:	
-	linalg::aliases::byte4 encodeRgbwFrame(const linalg::aliases::float3& rgbCalibrated, LEDState& state, const float& whiteMixerThreshold, const float& whiteLedIntensity, const linalg::aliases::float3& whitePointRgb, LedString::ColorOrder colorOrder);
+	linalg::aliases::byte4 encodeRgbwFrame(const linalg::aliases::float3& rgbCalibrated, LEDState& state, const float& whiteMixerThreshold, const float& whiteLedIntensity, const linalg::aliases::float3& whitePointRgb, const float& ditherFactor, LedString::ColorOrder colorOrder);
 	std::vector<LEDState> states;
 };

@@ -28,6 +28,7 @@ private:
 	linalg::aliases::float3 _ice_white_temperatur;
 	float _ice_white_mixer_threshold;
 	float _ice_white_led_intensity;
+	float _ice_dither_factor;
 
 	static bool isRegistered;
 };

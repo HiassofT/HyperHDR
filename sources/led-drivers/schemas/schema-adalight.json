@@ -68,7 +68,7 @@
 			"format" : "stepper",						
 			"title":"edt_ice_white_mixer_threshold",
 			"required" : true,
-			"default" : 0.02,
+			"default" : 0.0,
 			"step": 0.05,
 			"minimum" : 0.0,
 			"maximum" : 1.0,
@@ -78,6 +78,22 @@
 				}
 			},
 			"propertyOrder" : 7
+		},
+		"ice_dither_factor": {
+			"type": "number",
+			"format" : "stepper",						
+			"title":"edt_ice_dither_factor",
+			"required" : true,
+			"default" : 1.0,
+			"step": 0.05,
+			"minimum" : 0.0,
+			"maximum" : 1.0,
+			"options": {
+				"dependencies": {
+					"enable_ice_rgbw": true
+				}
+			},
+			"propertyOrder" : 8
 		},
 		"ice_white_led_intensity": {
 			"type": "number",
@@ -93,7 +109,7 @@
 					"enable_ice_rgbw": true
 				}
 			},
-			"propertyOrder" : 8
+			"propertyOrder" : 9
 		},		
 		"ice_white_temperatur_r": {
 			"type": "number",
@@ -109,7 +125,7 @@
 					"enable_ice_rgbw": true
 				}
 			},
-			"propertyOrder" : 9
+			"propertyOrder" : 10
 		},
 		"ice_white_temperatur_g": {
 			"type": "number",
@@ -125,7 +141,7 @@
 					"enable_ice_rgbw": true
 				}
 			},
-			"propertyOrder" : 10
+			"propertyOrder" : 11
 		},
 		"ice_white_temperatur_b": {
 			"type": "number",
@@ -141,7 +157,7 @@
 					"enable_ice_rgbw": true
 				}
 			},
-			"propertyOrder" : 11
+			"propertyOrder" : 12
 		},
 		"white_channel_calibration": {
 			"type": "boolean",
@@ -155,7 +171,7 @@
 					"enable_ice_rgbw": false
 				}
 			},
-			"propertyOrder" : 12
+			"propertyOrder" : 13
 		},
 		"white_channel_limit": {
 			"type": "number",
@@ -172,7 +188,7 @@
 					"white_channel_calibration": true
 				}
 			},
-			"propertyOrder" : 13
+			"propertyOrder" : 14
 		},
 		"white_channel_red": {
 			"type": "integer",
@@ -188,7 +204,7 @@
 					"white_channel_calibration": true
 				}
 			},
-			"propertyOrder" : 14
+			"propertyOrder" : 15
 		},
 		"white_channel_green": {
 			"type": "integer",
@@ -204,7 +220,7 @@
 					"white_channel_calibration": true
 				}
 			},
-			"propertyOrder" : 15
+			"propertyOrder" : 16
 		},
 		"white_channel_blue": {
 			"type": "integer",
@@ -220,7 +236,7 @@
 					"white_channel_calibration": true
 				}
 			},
-			"propertyOrder" : 16
+			"propertyOrder" : 17
 		},
 		"delayAfterConnect": {
 			"type": "integer",
@@ -233,7 +249,7 @@
 					"awa_mode": false
 				}
 			},
-			"propertyOrder" : 17
+			"propertyOrder" : 18
 		},
 		"lightberry_apa102_mode": {
 			"type": "boolean",
@@ -246,7 +262,7 @@
 					"awa_mode": false
 				}
 			},
-			"propertyOrder" : 18
+			"propertyOrder" : 19
 		},
 		"maxRetry":
 		{
@@ -258,7 +274,7 @@
 			"maximum" : 120,
 			"default" : 0,
 			"required" : true,
-			"propertyOrder" : 19
+			"propertyOrder" : 20
 		}
 	},
 	"additionalProperties": true

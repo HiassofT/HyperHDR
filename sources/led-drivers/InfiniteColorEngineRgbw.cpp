@@ -37,7 +37,7 @@
 #include <infinite-color-engine/ColorSpace.h>
 using namespace linalg::aliases;
 
-void InfiniteColorEngineRgbw::renderRgbwFrame(const std::vector<float3>& infiniteColors, const float& whiteMixerThreshold, const float& whiteLedIntensity, const float3& whitePointRgb,
+void InfiniteColorEngineRgbw::renderRgbwFrame(const std::vector<float3>& infiniteColors, const float& whiteMixerThreshold, const float& whiteLedIntensity, const float3& whitePointRgb, const float& ditherFactor,
 											std::vector<uint8_t>& output, size_t writeIndex, LedString::ColorOrder colorOrder)
 {
 	const size_t ledCount = infiniteColors.size();
@@ -65,13 +65,13 @@ void InfiniteColorEngineRgbw::renderRgbwFrame(const std::vector<float3>& infinit
 
 	for (; colorIt != infiniteColors.cend(); ++colorIt, ++stateIt)
 	{
-		byte4 led = encodeRgbwFrame(*colorIt, *stateIt, whiteMixerThreshold, whiteLedIntensity, whitePointRgb, colorOrder);
+		byte4 led = encodeRgbwFrame(*colorIt, *stateIt, whiteMixerThreshold, whiteLedIntensity, whitePointRgb, ditherFactor, colorOrder);
 		std::memcpy(output.data() + writeIndex, &led, sizeof(led));
 		writeIndex += sizeof(led);
 	}
 }
 
-byte4 InfiniteColorEngineRgbw::encodeRgbwFrame(const float3& rgbCalibrated, LEDState& state, const float& whiteMixerThreshold, const float& whiteLedIntensity, const float3& whitePointRgb, LedString::ColorOrder colorOrder)
+byte4 InfiniteColorEngineRgbw::encodeRgbwFrame(const float3& rgbCalibrated, LEDState& state, const float& whiteMixerThreshold, const float& whiteLedIntensity, const float3& whitePointRgb, const float& ditherFactor, LedString::ColorOrder colorOrder)
 {
 	if (state.last_input == rgbCalibrated && state.initialized) {
 		return state.last_sent_bytes;
@@ -89,9 +89,9 @@ byte4 InfiniteColorEngineRgbw::encodeRgbwFrame(const float3& rgbCalibrated, LEDS
 
 	constexpr float denom = 0.00001f;
 	float4 target4;
-	if (whiteLedIntensity > denom)
+	if (whiteLedIntensity > denom && linalg::minelem(whitePointRgb) > denom)
 	{
-		float common = linalg::minelem(rgbCalibrated * whitePointRgb);
+		float common = linalg::minelem(rgbCalibrated / whitePointRgb);
 		float w_mian = (1.0f - whiteMixerThreshold);
 		float w_factor = (w_mian > denom) ? std::clamp((common - whiteMixerThreshold) / w_mian, 0.0f, 1.0f) : 1.0f;
 		float base_w_amount = common * w_factor;
@@ -119,7 +119,7 @@ byte4 InfiniteColorEngineRgbw::encodeRgbwFrame(const float3& rgbCalibrated, LEDS
 	float delta_motion = linalg::length2(rgbCalibrated - state.last_input);
 	float leak = linalg::lerp(0.96f, 0.80f, std::clamp(delta_motion * 50.0f, 0.0f, 1.0f));
 
-	state.error = (current_target - state.last_output) * leak;
+	state.error = (current_target - state.last_output) * ditherFactor * leak;
 
 	switch (const auto base = static_cast<byte4>(final_out);  colorOrder)
 	{

@@ -28,7 +28,7 @@
 			"format" : "stepper",						
 			"title":"edt_ice_white_mixer_threshold",
 			"required" : true,
-			"default" : 0.02,
+			"default" : 0.0,
 			"step": 0.05,
 			"minimum" : 0.0,
 			"maximum" : 1.0,
@@ -38,6 +38,22 @@
 				}
 			},
 			"propertyOrder" : 4
+		},
+		"ice_dither_factor": {
+			"type": "number",
+			"format" : "stepper",						
+			"title":"edt_ice_dither_factor",
+			"required" : true,
+			"default" : 1.0,
+			"step": 0.05,
+			"minimum" : 0.0,
+			"maximum" : 1.0,
+			"options": {
+				"dependencies": {
+					"enable_ice_rgbw": true
+				}
+			},
+			"propertyOrder" : 5
 		},
 		"ice_white_led_intensity": {
 			"type": "number",
@@ -53,7 +69,7 @@
 					"enable_ice_rgbw": true
 				}
 			},
-			"propertyOrder" : 5
+			"propertyOrder" : 6
 		},		
 		"ice_white_temperatur_r": {
 			"type": "number",
@@ -69,7 +85,7 @@
 					"enable_ice_rgbw": true
 				}
 			},
-			"propertyOrder" : 6
+			"propertyOrder" : 7
 		},
 		"ice_white_temperatur_g": {
 			"type": "number",
@@ -85,7 +101,7 @@
 					"enable_ice_rgbw": true
 				}
 			},
-			"propertyOrder" : 7
+			"propertyOrder" : 8
 		},
 		"ice_white_temperatur_b": {
 			"type": "number",
@@ -101,7 +117,7 @@
 					"enable_ice_rgbw": true
 				}
 			},
-			"propertyOrder" : 8
+			"propertyOrder" : 9
 		},
 		"rgbw": {
 			"type": "boolean",
@@ -113,7 +129,7 @@
 					"enable_ice_rgbw": false
 				}
 			},
-			"propertyOrder" : 9
+			"propertyOrder" : 10
 		},
 		"white_algorithm": {
 			"type": "string",
@@ -149,7 +165,7 @@
 					"rgbw": true
 				}
 			},
-			"propertyOrder": 10
+			"propertyOrder": 11
 		},
 		"white_channel_limit": {
 			"type": "number",
@@ -166,7 +182,7 @@
 					"white_algorithm": "hyperserial_custom"
 				}
 			},
-			"propertyOrder" : 11
+			"propertyOrder" : 12
 		},
 		"white_channel_red": {
 			"type": "integer",
@@ -182,7 +198,7 @@
 					"white_algorithm": "hyperserial_custom"
 				}
 			},
-			"propertyOrder" : 12
+			"propertyOrder" : 13
 		},
 		"white_channel_green": {
 			"type": "integer",
@@ -198,7 +214,7 @@
 					"white_algorithm": "hyperserial_custom"
 				}
 			},
-			"propertyOrder" : 13
+			"propertyOrder" : 14
 		},
 		"white_channel_blue": {
 			"type": "integer",
@@ -214,7 +230,7 @@
 					"white_algorithm": "hyperserial_custom"
 				}
 			},
-			"propertyOrder" : 14
+			"propertyOrder" : 15
 		}
 	},
 	"additionalProperties": true
